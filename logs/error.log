@@ -1,0 +1,81 @@
+2026-05-03T11:06:57.971Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T11:06:57.981Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T11:15:23.045Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T11:15:23.049Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T11:20:03.074Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T11:20:03.076Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T11:48:04.718Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T11:48:04.723Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T20:22:19.303Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T20:22:19.325Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T20:26:22.775Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T20:26:23.167Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T20:26:30.116Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T20:26:30.205Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T20:26:34.293Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T20:26:36.037Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T20:26:36.042Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T20:26:39.016Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T20:26:39.156Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T20:26:44.490Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T20:30:12.654Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T20:30:44.118Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-03T20:30:46.575Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-04T17:07:31.597Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-04T17:07:31.625Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-04T17:07:45.194Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-06T10:32:12.356Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-06T10:32:12.375Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-06T10:32:23.058Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-06T10:32:23.733Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-06T10:32:35.586Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-06T10:32:35.589Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-06T10:32:36.697Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-06T10:32:36.699Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-06T13:48:09.151Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-06T13:48:09.180Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-06T20:15:03.416Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-06T20:15:03.522Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-07T17:41:38.945Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-07T17:41:38.964Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-07T17:41:52.674Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-07T17:41:53.016Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-07T17:41:58.360Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-07T17:41:58.534Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-18T09:42:14.705Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-18T09:42:14.713Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-18T09:42:39.041Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-18T09:42:39.099Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-18T09:42:40.460Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-18T09:42:40.466Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-18T09:42:41.827Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-18T09:42:41.878Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-18T09:42:43.722Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-18T09:42:43.724Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-18T10:24:24.190Z [ERROR]: 🔥 Auth error: JsonWebTokenError - jwt malformed
+2026-05-27T07:52:10.381Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-27T07:52:10.415Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-27T07:52:10.421Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-27T07:52:56.948Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-27T07:52:57.278Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-27T07:52:57.283Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-27T07:52:57.286Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-27T07:52:57.306Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-27T07:52:57.360Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-27T07:52:57.624Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-27T07:52:57.627Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-27T07:52:57.629Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-27T07:52:57.856Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-27T07:52:57.859Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-05-27T07:52:57.873Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-06-12T21:09:27.891Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-06-12T21:09:27.899Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-06-12T21:09:27.901Z [ERROR]: 🔥 Auth error: TokenExpiredError - jwt expired
+2026-06-13T12:21:27.322Z [ERROR]: 🔥 Auth error: MongoServerSelectionError - connection <monitor> to 159.41.231.46:27017 timed out
+2026-06-13T12:21:27.323Z [ERROR]: 🔥 Auth error: MongoServerSelectionError - connection <monitor> to 159.41.231.46:27017 timed out
+2026-06-13T12:21:27.338Z [ERROR]: 🔥 Auth error: MongoServerSelectionError - connection <monitor> to 159.41.231.46:27017 timed out
+2026-06-13T12:21:29.152Z [ERROR]: 🔥 Auth error: MongoServerSelectionError - Socket 'secureConnect' timed out after 30003ms (connectTimeoutMS: 30000)
+2026-06-13T12:21:29.671Z [ERROR]: 🔥 Auth error: MongoServerSelectionError - Socket 'secureConnect' timed out after 30003ms (connectTimeoutMS: 30000)
+2026-06-13T12:23:03.748Z [ERROR]: 🔥 Auth error: MongoServerSelectionError - connection <monitor> to 159.41.231.46:27017 closed
+2026-06-13T12:23:38.424Z [ERROR]: 🔥 Auth error: MongoNetworkTimeoutError - Socket 'secureConnect' timed out after 30004ms (connectTimeoutMS: 30000)
+2026-06-13T12:23:38.427Z [ERROR]: 🔥 Auth error: MongoNetworkTimeoutError - Socket 'secureConnect' timed out after 30007ms (connectTimeoutMS: 30000)
