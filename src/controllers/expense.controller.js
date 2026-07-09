@@ -265,6 +265,90 @@ exports.updateExpense = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
+// ── Sync local (Room) expenses ─────────────────────────────────────────────────
+// Accepts the client's offline ExpenseEntity rows and upserts them by (user, clientId),
+// so re-syncing the same local row never creates a duplicate. Each row is processed
+// independently: one bad row reports an error without failing the whole batch.
+exports.syncExpenses = async (req, res, next) => {
+  try {
+    const { expenses } = req.body;
+
+    if (!Array.isArray(expenses) || expenses.length === 0) {
+      return sendError(res, 'VALIDATION_ERROR', 'expenses must be a non-empty array', 400, 'expenses');
+    }
+
+    const results = [];
+
+    for (const item of expenses) {
+      const clientId = item?.id;
+
+      try {
+        if (!clientId) {
+          results.push({ clientId: null, status: 'error', message: 'Missing local id' });
+          continue;
+        }
+
+        const amount = Number(item.amount);
+        if (!Number.isFinite(amount) || amount < 0) {
+          results.push({ clientId, status: 'error', message: 'Invalid amount' });
+          continue;
+        }
+
+        if (!item.date) {
+          results.push({ clientId, status: 'error', message: 'Missing date' });
+          continue;
+        }
+
+        // Resolve the flattened local category, falling back to auto-creating
+        // a custom category for this user if it doesn't exist on the server yet.
+        let category = await resolveCategory(item.categoryId) || await resolveCategory(item.categoryName);
+        if (!category) {
+          category = await Category.create({
+            name:      item.categoryName || 'Other',
+            color:     item.categoryColor || '#607D8B',
+            icon:      item.categoryIcon || 'ic_other',
+            isDefault: false,
+            user:      req.user._id
+          });
+        }
+
+        const expense = await Expense.findOneAndUpdate(
+          { user: req.user._id, clientId },
+          {
+            user:       req.user._id,
+            clientId,
+            category:   category._id,
+            amount,
+            currency:   item.currency || req.user.currency || 'INR',
+            note:       item.note || '',
+            date:       item.date,
+            receiptUrl: item.receiptUrl || null
+          },
+          { upsert: true, new: true, setDefaultsOnInsert: true, runValidators: true }
+        );
+
+        results.push({
+          clientId,
+          status:    'synced',
+          serverId:  expense.expenseId,
+          updatedAt: expense.updatedAt
+        });
+      } catch (itemErr) {
+        results.push({ clientId: clientId || null, status: 'error', message: itemErr.message });
+      }
+    }
+
+    const synced = results.filter(r => r.status === 'synced').length;
+
+    sendSuccess(res, {
+      total:  results.length,
+      synced,
+      failed: results.length - synced,
+      results
+    });
+  } catch (err) { next(err); }
+};
+
 // ── Delete expense ────────────────────────────────────────────────────────────
 exports.deleteExpense = async (req, res, next) => {
   try {

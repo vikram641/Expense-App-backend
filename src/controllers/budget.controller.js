@@ -68,6 +68,79 @@ exports.setBudget = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
+// ── Sync local (Room) budgets ─────────────────────────────────────────────────
+// Room's primary key is (categoryId, month), which already matches the server's
+// unique (user, category, month) index — so we upsert directly on that composite
+// key, no extra clientId field needed. spentAmount is ignored: it's always derived
+// live from the Expense collection (see getBudgets), never stored.
+exports.syncBudgets = async (req, res, next) => {
+  try {
+    const { budgets } = req.body;
+
+    if (!Array.isArray(budgets) || budgets.length === 0) {
+      return sendError(res, 'VALIDATION_ERROR', 'budgets must be a non-empty array', 400, 'budgets');
+    }
+
+    const results = [];
+
+    for (const item of budgets) {
+      const clientId = item?.id || null;
+
+      try {
+        if (!item.month) {
+          results.push({ clientId, categoryId: item?.categoryId || null, status: 'error', message: 'Missing month' });
+          continue;
+        }
+
+        const limitAmount = Number(item.limitAmount);
+        if (!Number.isFinite(limitAmount) || limitAmount < 0) {
+          results.push({ clientId, categoryId: item?.categoryId || null, status: 'error', message: 'Invalid limitAmount' });
+          continue;
+        }
+
+        // Resolve the flattened local category, falling back to auto-creating
+        // a custom category for this user if it doesn't exist on the server yet.
+        let category = await resolveCategory(item.categoryId) || await resolveCategory(item.categoryName);
+        if (!category) {
+          category = await Category.create({
+            name:      item.categoryName || 'Other',
+            color:     item.categoryColor || '#607D8B',
+            icon:      item.categoryIcon || 'ic_other',
+            isDefault: false,
+            user:      req.user._id
+          });
+        }
+
+        const budget = await Budget.findOneAndUpdate(
+          { user: req.user._id, category: category._id, month: item.month },
+          { limitAmount, currency: item.currency || req.user.currency || 'INR' },
+          { upsert: true, new: true, setDefaultsOnInsert: true, runValidators: true }
+        );
+
+        results.push({
+          clientId,
+          categoryId: category.categoryId,
+          status:     'synced',
+          serverId:   budget.budgetId,
+          month:      budget.month,
+          updatedAt:  budget.updatedAt
+        });
+      } catch (itemErr) {
+        results.push({ clientId, categoryId: item?.categoryId || null, status: 'error', message: itemErr.message });
+      }
+    }
+
+    const synced = results.filter(r => r.status === 'synced').length;
+
+    sendSuccess(res, {
+      total:  results.length,
+      synced,
+      failed: results.length - synced,
+      results
+    });
+  } catch (err) { next(err); }
+};
+
 // ── Delete budget ─────────────────────────────────────────────────────────────
 exports.deleteBudget = async (req, res, next) => {
   try {

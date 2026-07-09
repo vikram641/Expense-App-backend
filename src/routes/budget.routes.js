@@ -6,6 +6,7 @@ router.use(protect);
 
 router.get('/',       ctrl.getBudgets);
 router.post('/',      ctrl.setBudget);
+router.post('/sync',  ctrl.syncBudgets);
 router.delete('/:id', ctrl.deleteBudget);
 
 module.exports = router;
