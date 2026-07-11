@@ -45,6 +45,48 @@ exports.getBudgets = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
+// ── Get budgets for the last two months ───────────────────────────────────────
+exports.getLastTwoMonthsBudgets = async (req, res, next) => {
+  try {
+    const now = new Date();
+    const months = [];
+    for (let i = 1; i >= 0; i--) {
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      months.push(`${d.getFullYear()}-${mm}`);
+    }
+
+    const budgetsByMonth = await Promise.all(months.map(async (month) => {
+      const monthBudgets = await Budget.find({ user: req.user._id, month })
+        .populate('category', 'categoryId name color icon');
+
+      return Promise.all(monthBudgets.map(async (b) => {
+        const from = `${month}-01`;
+        const to   = `${month}-31`;
+        const agg  = await Expense.aggregate([
+          { $match: { user: req.user._id, category: b.category._id, date: { $gte: from, $lte: to } } },
+          { $group: { _id: null, total: { $sum: '$amount' } } }
+        ]);
+        return {
+          id:            b.budgetId,
+          categoryId:    b.category.categoryId,
+          categoryName:  b.category.name,
+          categoryColor: b.category.color,
+          limitAmount:   b.limitAmount,
+          spentAmount:   agg[0]?.total || 0,
+          month:         b.month,
+          currency:      b.currency
+        };
+      }));
+    }));
+
+    sendSuccess(res, {
+      months,
+      budgets: budgetsByMonth.flat()
+    });
+  } catch (err) { next(err); }
+};
+
 // ── Set / upsert budget ───────────────────────────────────────────────────────
 exports.setBudget = async (req, res, next) => {
   try {

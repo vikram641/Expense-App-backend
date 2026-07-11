@@ -190,6 +190,40 @@ exports.getExpenses = async (req, res, next) => {
 //   } catch (err) { next(err); }
 // };
 
+// ── Get expenses for the last two months ──────────────────────────────────────
+exports.getLastTwoMonthsExpenses = async (req, res, next) => {
+  try {
+    const now = new Date();
+    const months = [];
+    for (let i = 1; i >= 0; i--) {
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      months.push(`${d.getFullYear()}-${mm}`);
+    }
+
+    const from = `${months[0]}-01`;
+    const to   = `${months[1]}-31`;
+
+    const expenses = await Expense.find({ user: req.user._id, date: { $gte: from, $lte: to } })
+      .populate('category', 'categoryId name color icon')
+      .sort({ date: -1, createdAt: -1 });
+
+    const summary = await Promise.all(months.map(async (m) => {
+      const agg = await Expense.aggregate([
+        { $match: { user: req.user._id, date: { $gte: `${m}-01`, $lte: `${m}-31` } } },
+        { $group: { _id: null, total: { $sum: '$amount' } } }
+      ]);
+      return { month: m, total: agg[0]?.total || 0 };
+    }));
+
+    sendSuccess(res, {
+      months,
+      summary,
+      expenses: expenses.map(formatExpense)
+    });
+  } catch (err) { next(err); }
+};
+
 // ── Get single expense ─────────────────────────────────────────────────────────
 exports.getExpense = async (req, res, next) => {
   try {

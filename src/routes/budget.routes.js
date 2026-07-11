@@ -4,9 +4,10 @@ const protect = require('../middleware/auth.middleware');
 
 router.use(protect);
 
-router.get('/',       ctrl.getBudgets);
-router.post('/',      ctrl.setBudget);
-router.post('/sync',  ctrl.syncBudgets);
-router.delete('/:id', ctrl.deleteBudget);
+router.get('/',                ctrl.getBudgets);
+router.post('/',               ctrl.setBudget);
+router.post('/sync',           ctrl.syncBudgets);
+router.get('/last-two-months', ctrl.getLastTwoMonthsBudgets);
+router.delete('/:id',          ctrl.deleteBudget);
 
 module.exports = router;
