@@ -72,6 +72,7 @@ exports.getLastTwoMonthsBudgets = async (req, res, next) => {
           categoryId:    b.category.categoryId,
           categoryName:  b.category.name,
           categoryColor: b.category.color,
+          categoryIcon:  b.category.icon,
           limitAmount:   b.limitAmount,
           spentAmount:   agg[0]?.total || 0,
           month:         b.month,
