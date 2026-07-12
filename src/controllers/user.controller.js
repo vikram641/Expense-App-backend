@@ -33,6 +33,22 @@ exports.updateProfile = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
+// ── Save FCM token ──────────────────────────────────────────────────────────────
+exports.saveFcmToken = async (req, res, next) => {
+  try {
+    const { fcmToken } = req.body;
+    if (!fcmToken) return sendError(res, 'VALIDATION_ERROR', 'fcmToken is required', 400, 'fcmToken');
+
+    const user = await User.findById(req.user._id);
+    if (!user) return sendError(res, 'NOT_FOUND', 'User not found', 404);
+
+    user.fcmToken = fcmToken;
+    await user.save();
+
+    sendSuccess(res, { message: 'FCM token saved successfully' });
+  } catch (err) { next(err); }
+};
+
 // ── Change password ────────────────────────────────────────────────────────────
 exports.changePassword = async (req, res, next) => {
   try {

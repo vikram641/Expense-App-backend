@@ -2,6 +2,7 @@ const Expense  = require('../models/expense.model');
 const Category = require('../models/category.model');
 const Budget   = require('../models/budget.model');
 const { sendSuccess, sendError } = require('../utils/response');
+const { sendPushNotification } = require('../utils/push');
 
 // // Helper: resolve a category by custom categoryId or ObjectId
 // async function resolveCategory(id) {
@@ -373,6 +374,14 @@ exports.syncExpenses = async (req, res, next) => {
     }
 
     const synced = results.filter(r => r.status === 'synced').length;
+
+    if (synced > 0) {
+      sendPushNotification(req.user.fcmToken, {
+        title: 'Expenses Synced',
+        body:  `${synced} expense${synced > 1 ? 's' : ''} synced successfully.`,
+        data:  { type: 'EXPENSE_SYNC', synced, failed: results.length - synced }
+      });
+    }
 
     sendSuccess(res, {
       total:  results.length,

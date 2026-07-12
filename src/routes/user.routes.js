@@ -7,5 +7,6 @@ router.use(protect);
 router.get('/profile',          ctrl.getProfile);
 router.put('/profile',          ctrl.updateProfile);
 router.put('/change-password',  ctrl.changePassword);
+router.post('/fcm-token',       ctrl.saveFcmToken);
 
 module.exports = router;
